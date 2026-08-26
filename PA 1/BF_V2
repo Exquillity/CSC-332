@@ -1,8 +1,10 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 int BF_v2 (int a, int b) {
-    int limit = std::min(a, b);
+    int limit = min(a, b);
     for (int i = limit; i >= 1; i--) {
         if (a % i == 0 && b % i == 0) {
             return i;
