@@ -1,0 +1,15 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int BF_v1 (int a, int b) {
+    int gcd = 1;
+    int limit = min(a, b);
+    for (int i =1; i <= limit; i++) {
+        if (a % i == 0 && b % i == 0) {
+            gcd = i;
+        }
+    }
+    return gcd;
+}
