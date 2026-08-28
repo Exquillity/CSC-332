@@ -4,7 +4,14 @@ using namespace std;
 
 int OE (int a, int b) {
     int remainder = 1;
-    while (remainder != 0){
+    while (remainder != 0) {
+        int quotient = a / b;
+        remainder = a - quotient * b;
+        a = b;
+        b = remainder;
+    }
+    return a;
+}
     
 
   
