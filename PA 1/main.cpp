@@ -2,6 +2,7 @@
 #include <random>
 #include <fstream>
 #include <vector>
+#include <chrono>
 
 #include "BF_V1"
 #include "BF_V2"
@@ -71,7 +72,55 @@ int main() {
     }
 
     bf2File.close();
+    /*
+    // Write results to CSV file for OE
+    ofstream OEFile("OE_Results.csv");
 
+    OEFile << "Number One,Number Two,Their GCD,Time Spent (Milliseconds)\n";
 
+    vector<double> OETimes;
+
+    for (pair<int, int> p : numbers) {
+
+        auto start = chrono::high_resolution_clock::now();
+
+        int gcd = OE(p.first, p.second);
+
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double, std::milli> elapsed = end - start;
+
+        OETimes.push_back(elapsed.count());
+
+        OEFile << p.first << "," << p.second << "," << gcd << "," << elapsed.count() << "\n";
+    }
+
+    OEFile.close();
+
+    // Write results to CSV file for SE
+    ofstream SEFile("SE_Results.csv");
+
+    SEFile << "Number One,Number Two,Their GCD,Time Spent (Milliseconds)\n";
+
+    vector<double> SETimes;
+
+    for (pair<int, int> p : numbers) {
+
+        auto start = chrono::high_resolution_clock::now();
+
+        int gcd = SE(p.first, p.second);
+
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double, std::milli> elapsed = end - start;
+
+        SETimes.push_back(elapsed.count());
+
+        SEFile << p.first << "," << p.second << "," << gcd << "," << elapsed.count() << "\n";
+    }
+
+    SEFile.close();
+
+    */
     return 0;
 }
