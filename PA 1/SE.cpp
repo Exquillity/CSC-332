@@ -1,0 +1,24 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int SE (int a, int b) {
+    int limit = min(a,b);
+    int remainder = 1;
+    while (remainder != 0) {
+        remainder = a - b;
+        if (remainder >= b) {
+            remainder = remainder - b;
+            if (remainder >= b) {
+                remainder = remainder - b;
+                if (remainder >= b) {
+                    remainder = a - b * (a/b);
+                }
+            }
+        }
+        a = b;
+        b = remainder;
+    }
+    return a;
+}
