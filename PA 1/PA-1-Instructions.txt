@@ -1,0 +1,29 @@
+Compilation Instruction:
+
+Environment and Compiler:
+Environment: Docker container (glennsantacruz/labs:csc332-pa)
+Compiler: g++ (C++11 or higher)
+
+Flags:
+-O2            
+- -I PA-1-Source  
+- -o main        
+
+Command to Compile:
+cd /332builder/local 
+g++ -O2 PA-1-Source/main.cpp -I PA-1-Source -o main
+
+Execution Instruction:
+
+Argument:
+None
+
+Flags: 
+None
+
+Execution Command:
+./main
+
+Example Invocation:
+root@container:/332builder/local# ./main
+
