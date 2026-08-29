@@ -7,6 +7,8 @@
 
 #include "BF_V1"
 #include "BF_V2"
+#include "OE"
+#include "SE"
 
 using namespace std;
 
@@ -100,6 +102,56 @@ double averageSavedTime(const vector<double>& algorithmA,const vector<double>& a
     return totalSaved / count;
 }
 
+// Writes the conclusions to a text file witht the average time saved for each comparison
+void writeConclusions(
+    const vector<double>& bf1, 
+    const vector<double>& bf2, 
+    const vector<double>& oe, 
+    const vector<double>& se
+) {
+    ofstream file("Conclusions.txt");
+    int count = 0;
+    double avgSaved = 0.0;
+
+    // (1) BF_v2 vs BF_v1
+    avgSaved = averageSavedTime(bf2, bf1, count);
+    file << "(1) Out of 1,000 pairs of integers, brute-force (v2) outperformed brute-force (v1) in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    // (2) OE vs BF_v1
+    avgSaved = averageSavedTime(oe, bf1, count);
+    file << "(2) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v1) in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    // (3) OE vs BF_v2
+    avgSaved = averageSavedTime(oe, bf2, count);
+    file << "(3) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v2) in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    // (4) SE vs OE
+    avgSaved = averageSavedTime(se, oe, count);
+    file << "(4) Out of 1,000 pairs of integers, the second version of Euclid outperformed the original version of Euclid in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    // (5) SE vs BF_v1
+    avgSaved = averageSavedTime(se, bf1, count);
+    file << "(5) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v1) in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    // (6) SE vs BF_v2
+    avgSaved = averageSavedTime(se, bf2, count);
+    file << "(6) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v2) in " 
+         << count << " pairs; and the average saved time for these " << count 
+         << " pairs of integers was " << avgSaved << " milliseconds.\n";
+
+    file.close();
+}
+
 int main() {
     random_device rd;
     mt19937 gen(rd());
@@ -124,7 +176,6 @@ int main() {
     vector<double> bf2Times = runAlgorithm("BF_v2_Results.csv", numbers, BF_v2);
     writeStatistics( "BF_v2_Statistics.csv", bf2Times);
 
-    /*
     // Run OE
     vector<double> OETimes = runAlgorithm("OE_Results.csv", numbers, OE);
     writeStatistics( "OE_Statistics.csv", OETimes );
@@ -133,6 +184,7 @@ int main() {
     vector<double> SETimes = runAlgorithm("SE_Results.csv", numbers, SE);
     writeStatistics( "SE_Statistics.csv", SETimes );
 
-    */
+    writeConclusions(bf1Times, bf2Times, OETimes, SETimes);
+
     return 0;
 }

@@ -4,14 +4,17 @@
 using namespace std;
 
 int SE (int a, int b) {
+    if (a < b) {
+        swap(a, b);
+    }
     int remainder = 1;
     while (remainder != 0) {
         remainder = a - b;
-        if (remainder >= b) {
+        if (remainder > b) {
             remainder = remainder - b;
-            if (remainder >= b) {
+            if (remainder > b) {
                 remainder = remainder - b;
-                if (remainder >= b) {
+                if (remainder > b) {
                     remainder = a - b * (a/b);
                 }
             }

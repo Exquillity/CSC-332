@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <fstream>
+#include <chrono>
 
 using namespace std;
 
@@ -11,5 +13,7 @@ int BF_v1 (int a, int b) {
             gcd = i;
         }
     }
+    
     return gcd;
+
 }
