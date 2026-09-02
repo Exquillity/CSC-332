@@ -1,6 +1,0 @@
-(1) Out of 1,000 pairs of integers, brute-force (v2) outperformed brute-force (v1) in 458 pairs; and the average saved time for these 458 pairs of integers was 0.598669 milliseconds.
-(2) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v1) in 1000 pairs; and the average saved time for these 1000 pairs of integers was 2.15637 milliseconds.
-(3) Out of 1,000 pairs of integers, the original version of Euclid outperformed brute-force (v2) in 999 pairs; and the average saved time for these 999 pairs of integers was 2.34475 milliseconds.
-(4) Out of 1,000 pairs of integers, the second version of Euclid outperformed the original version of Euclid in 209 pairs; and the average saved time for these 209 pairs of integers was 9.86842e-05 milliseconds.
-(5) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v1) in 1000 pairs; and the average saved time for these 1000 pairs of integers was 2.15635 milliseconds.
-(6) Out of 1,000 pairs of integers, the second version of Euclid outperformed brute-force (v2) in 999 pairs; and the average saved time for these 999 pairs of integers was 2.34472 milliseconds.
