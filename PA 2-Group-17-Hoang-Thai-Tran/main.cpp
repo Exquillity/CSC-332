@@ -24,13 +24,13 @@ struct BenchmarkResult {
 // Merges two subarrays of arr[].
 // First subarray is arr[left..mid]
 // Second subarray is arr[mid+1..right]
-void merge(vector<int>& arr, int left, int mid, int right){
+void merge(vector<double>& arr, int left, int mid, int right){
                          
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
     // Create temp vectors
-    vector<int> L(n1), R(n2);
+    vector<double> L(n1), R(n2);
 
     // Copy data to temp vectors L[] and R[]
     for (int i = 0; i < n1; i++)
@@ -70,7 +70,7 @@ void merge(vector<int>& arr, int left, int mid, int right){
 }
 
 // Begin is for left index and end is right index of the sub-array of arr to be sorted
-void mergeSort(vector<int>& arr, int left, int right){
+void mergeSort(vector<double>& arr, int left, int right){
     
     if (left >= right)
         return;
@@ -81,26 +81,26 @@ void mergeSort(vector<int>& arr, int left, int right){
     merge(arr, left, mid, right);
 }
 
-vector<int> generateRandomIntegers(int size) {
+vector<double> generateRandomDoubles(int size) {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> dist(1, 1000000); // Random integers between 1 and 1,000,000
+    uniform_real_distribution<double> dist(1.0, 1000000.0); // Random doubles between 1 and 1,000,000
 
-    vector<int> array(size);
+    vector<double> array(size);
     for (int i = 0; i < size; ++i) {
         array[i] = dist(gen);
     }
     return array;
 }
 
-vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<int>>& originalArrays, vector<vector<int>>& sortedArrays) {
+vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<double>>& originalArrays, vector<vector<double>>& sortedArrays) {
     vector<BenchmarkResult> results;
 
-    // Run benchmarks for each array size
+    // Run benchmarks for each array
     for (size_t i = 0; i < sizes.size(); ++i) {
         int n = sizes[i];
-        vector<int> original = generateRandomIntegers(n);
-        vector<int> sorted = original; // Copy original array
+        vector<double> original = generateRandomDoubles(n);
+        vector<double> sorted = original; // Copy original array
 
         // Measure time taken for merge sort
         auto start = chrono::high_resolution_clock::now();
@@ -109,7 +109,9 @@ vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<in
 
         chrono::duration<double> elapsed = end - start;
         double timeSec = elapsed.count();
-        if (timeSec <= 0.0) timeSec = 1e-9; // Avoid division by zero
+
+        // Make sure timeSec is not zero or negative
+        if (timeSec <= 0.0) timeSec = 1e-9;
 
         // Calculate performance 
         double nlogn = n * log2(n);
@@ -137,7 +139,7 @@ vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<in
 void exportToCSV(const vector<BenchmarkResult>& results, const string& filename) {
     ofstream csvFile(filename);
 
-    csvFile << "Array,Input size n,Value of n*logn,Time spent (seconds),Value of (n*logn)/time\n";
+    csvFile << "Array,Input size n for Array_i,Value of n*logn,Time spent (seconds),Value of (n*logn)/time\n";
 
     for (size_t i = 0; i < results.size(); ++i) {
         const auto& result = results[i];
@@ -145,14 +147,17 @@ void exportToCSV(const vector<BenchmarkResult>& results, const string& filename)
     csvFile.close();
 }
 
-void runInterface(const vector<vector<int>>& originalArrays, const vector<vector<int>>& sortedArrays) {
+void runInterface(const vector<vector<double>>& originalArrays, const vector<vector<double>>& sortedArrays) {
     int choice = 0;
     while (true) {
+        cout << "----------------------------------------\n";
+        cout << "Menu:\n";
         for (size_t i = 0; i < originalArrays.size(); ++i) {
             cout << "  [" << (i + 1) << "] View Array_" << (i + 1) 
                  << " (n = " << originalArrays[i].size() << ")\n";
         }
         cout << "  [0] Exit\n";
+        cout << "----------------------------------------\n";
         cout << "Select an array index (1-9) or 0 to exit: ";
 
         if (!(cin >> choice)) {
@@ -168,21 +173,22 @@ void runInterface(const vector<vector<int>>& originalArrays, const vector<vector
         } else if (choice >= 1 && choice <= static_cast<int>(originalArrays.size())) {
             int idx = choice - 1;
             int n = originalArrays[idx].size();
-            cout << "\n--- Original Array_" << choice << " (" << n << " elements) ---\n";
+            cout << "\nOriginal Array_" << choice << " (" << n << " elements): \n";
 
         for (int j = 0; j < n; ++j) {
             cout << fixed << setprecision(2) << originalArrays[idx][j] << " ";
 
-        if ((j + 1) % 10 == 0)
+        if ((j + 1) % 15 == 0)
             cout << "\n";
         }
 
-        cout << "\n--- Sorted Array_" << choice << " (" << n << " elements) ---\n";
+        cout << "\n\n";
+        cout << "\nSorted Array_" << choice << " (" << n << " elements):\n";
 
         for (int j = 0; j < n; ++j) {
             cout << fixed << setprecision(2) << sortedArrays[idx][j] << " ";
 
-        if ((j + 1) % 10 == 0)
+        if ((j + 1) % 15 == 0)
             cout << "\n";
         }       
 
@@ -197,7 +203,7 @@ int main() {
 
     vector<int> sizes = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000};
 
-    vector<vector<int>> originalArrays, sortedArrays;
+    vector<vector<double>> originalArrays, sortedArrays;
     vector<BenchmarkResult> results = runBenchmarks(sizes, originalArrays, sortedArrays);
 
     exportToCSV(results, "Mergesort_Time.csv");
