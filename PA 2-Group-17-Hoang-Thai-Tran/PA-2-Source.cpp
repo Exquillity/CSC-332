@@ -119,8 +119,8 @@ vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<do
 
         // Calculate Scientific Notation
         double exponent = floor(log10(ratio));
-        double mantissa = ratio / pow(10.0, exponent);
-        int roundedX = static_cast<int>(round(mantissa));
+        double sigfig = ratio / pow(10.0, exponent);
+        int roundedX = static_cast<int>(round(sigfig));
         int expY = static_cast<int>(exponent);
 
         if (roundedX == 10) { roundedX = 1; expY += 1; }
