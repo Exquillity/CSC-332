@@ -1,8 +1,1 @@
-How to run the program? Compile inside the Docker container using 'g++ -O2 PA-2-Source.cpp -o main' and execute the binary using './main'.
-
-Group Member contribution: Each seperarte files
-
-Group Member contribution:
-Hugh Hoang: 25% (Hugh Hoang acknowledges)
-Anthony Thai: 50% (Anthony Thai acknowledges)
-Lam Tran: 25% (Lam Huynh Tran acknowledges)
+How to run the program? Compile the source code using `g++ -O2 -std=c++11 PA-2-Source.cpp -o PA-2-Source`, and run the executable with `./PA-2-Source`.

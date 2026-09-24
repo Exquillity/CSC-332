@@ -81,6 +81,7 @@ void mergeSort(vector<double>& arr, int left, int right){
     merge(arr, left, mid, right);
 }
 
+// Generates a vector of random doubles of specified size 
 vector<double> generateRandomDoubles(int size) {
     random_device rd;
     mt19937 gen(rd());
@@ -93,6 +94,7 @@ vector<double> generateRandomDoubles(int size) {
     return array;
 }
 
+// Runs benchmarks for the specified sizes and returns the results
 vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<double>>& originalArrays, vector<vector<double>>& sortedArrays) {
     vector<BenchmarkResult> results;
 
@@ -130,12 +132,14 @@ vector<BenchmarkResult> runBenchmarks(const vector<int>& sizes, vector<vector<do
 
         results.push_back({n, nlogn, timeSec, roundedX, expY});
 
+        // Output the results to console
         cout << "Array_" << (i + 1) << " (n = " << n << "): " << fixed << setprecision(6) << timeSec << " s | Metric: " << roundedX << "E" << expY << "\n";
     }
 
     return results;
 }
 
+// Exports the benchmark results to a CSV file
 void exportToCSV(const vector<BenchmarkResult>& results, const string& filename) {
     ofstream csvFile(filename);
 
@@ -147,6 +151,7 @@ void exportToCSV(const vector<BenchmarkResult>& results, const string& filename)
     csvFile.close();
 }
 
+// Runs the user interface for viewing original and sorted arrays
 void runInterface(const vector<vector<double>>& originalArrays, const vector<vector<double>>& sortedArrays) {
     int choice = 0;
     while (true) {
@@ -178,7 +183,7 @@ void runInterface(const vector<vector<double>>& originalArrays, const vector<vec
         for (int j = 0; j < n; ++j) {
             cout << fixed << setprecision(2) << originalArrays[idx][j] << " ";
 
-        if ((j + 1) % 15 == 0)
+        if ((j + 1) % 12     == 0)
             cout << "\n";
         }
 
@@ -188,7 +193,7 @@ void runInterface(const vector<vector<double>>& originalArrays, const vector<vec
         for (int j = 0; j < n; ++j) {
             cout << fixed << setprecision(2) << sortedArrays[idx][j] << " ";
 
-        if ((j + 1) % 15 == 0)
+        if ((j + 1) % 12 == 0)
             cout << "\n";
         }       
 
@@ -201,6 +206,7 @@ void runInterface(const vector<vector<double>>& originalArrays, const vector<vec
 
 int main() {
 
+    // Define the sizes of the arrays to be tested
     vector<int> sizes = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000};
 
     vector<vector<double>> originalArrays, sortedArrays;
