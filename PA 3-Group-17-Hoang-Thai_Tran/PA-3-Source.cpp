@@ -15,6 +15,23 @@ int fibRecursive(int n) {
     return fibRecursive(n -1) + fibRecursive(n-2);
 }
 
+int fibDP(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+
+    vector<int> fib(n + 1);
+
+    fib[0] = 1;
+    fib[1] = 1;
+
+    for (int i = 2; i <= n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+
+    return fib[n];
+}
+
 void writeFibonacciCSV(const string& filename) {
     ofstream file(filename);
 
