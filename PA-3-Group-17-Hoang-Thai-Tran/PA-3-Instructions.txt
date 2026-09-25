@@ -1,0 +1,29 @@
+Compilation Instruction:
+
+Environment and Compiler:
+Environment: Docker container (glennsantacruz/csc332:pa3-fall26)
+Compiler: g++ (C++11 or higher)
+
+Flags:
+-O2             (Optimization level 2)
+-std=c++11      (C++11 standard support)
+-o PA-3-Source  (Output executable binary name)
+
+Command to Compile:
+cd /332builder/local
+g++ -O2 -std=c++11 PA-3-Source.cpp -o PA-3-Source
+
+
+Execution Instruction:
+
+Argument:
+None
+
+Flags: 
+None
+
+Execution Command:
+./PA-3-Source
+
+Example Invocation:
+root@container:/332builder/local# ./PA-3-Source

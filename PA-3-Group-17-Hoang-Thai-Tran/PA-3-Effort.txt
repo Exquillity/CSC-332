@@ -1,0 +1,15 @@
+Group Member contribution:
+Hugh Hoang: 25% (Hugh Hoang acknowledges)
+    - Implemented the Recursive Fibonacci function
+    - Assited with testing
+
+Anthony Thai: 50% (Anthony Thai acknowledges)
+    - Wrote the CSV function to write the results
+    - Set up the program in the docker image
+    - Made the user interface function
+    - Ensure the Efforts and Instruction txt files are correct
+
+Lam Tran: 25% (Lam Huynh Tran acknowledges)
+    - Implemented the Dynamic Programming Fibonacci function 
+    - Assisted with debugging
+
