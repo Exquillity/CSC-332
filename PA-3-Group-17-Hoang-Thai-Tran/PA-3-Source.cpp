@@ -44,7 +44,7 @@ void writeFibonacciCSV(const string& filename) {
         return;
     }
 
-    file << "n,F(n),T1: recursive time (ms),T2: DP time (ms),value of (2^n)/n,value of T1 / T2\n";
+    file << "n,F(n),T1: recursive time (ns),T2: DP time (ns),value of (2^n)/n,value of T1 / T2\n";
 
     vector<int> testN = {1, 2, 5, 10, 12, 15, 23, 25, 30, 36};
 
@@ -52,13 +52,13 @@ void writeFibonacciCSV(const string& filename) {
         auto start1 = chrono::high_resolution_clock::now();
         int fn = fibRecursive(n);
         auto end1 = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> t1_duration = end1 - start1;
+        chrono::duration<double, nano> t1_duration = end1 - start1;
         double t1 = t1_duration.count();
 
         auto start2 = chrono::high_resolution_clock::now();
-        // fibDP(n);
+        fibDP(n);
         auto end2 = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> t2_duration = end2 - start2;
+        chrono::duration<double, nano> t2_duration = end2 - start2;
         double t2 = t2_duration.count();
 
         double exp_val = pow(2.0, n) / static_cast<double>(n);
@@ -66,11 +66,11 @@ void writeFibonacciCSV(const string& filename) {
 
         file << n << "," << fn << ",";
         file << fixed << setprecision(2) << t1 << "," << t2 << ",";
+        file << defaultfloat;
         file << scientific << setprecision(2) << exp_val << "," << ratio << "\n";
     }
 
     file.close();
-    cout << "File saved successfully!\n";
 }
 
 void runInterface() {
@@ -113,11 +113,11 @@ void runInterface() {
             int result = fibRecursive(n);
             auto end = chrono::high_resolution_clock::now();
 
-            chrono::duration<double, milli> elapsed = end - start;
+            chrono::duration<double, nano> elapsed = end - start;
 
             cout << "F(" << n << ") = " << result << "\n";
             cout << fixed << setprecision(4);
-            cout << "Time taken: " << elapsed.count() << " ms\n\n";
+            cout << "Time taken: " << elapsed.count() << " ns\n\n";
 
         }
 
@@ -135,14 +135,14 @@ void runInterface() {
             }
 
             auto start = chrono::high_resolution_clock::now();
-            // int result = fibDP(n);
+            int result = fibDP(n);
             auto end = chrono::high_resolution_clock::now();
 
-            chrono::duration<double, milli> elapsed = end - start;
+            chrono::duration<double, nano> elapsed = end - start;
 
-            // cout << "F(" << n << ") = " << result << "\n";
+            cout << "F(" << n << ") = " << result << "\n";
             cout << fixed << setprecision(4);
-            cout << "Time taken: " << elapsed.count() << " ms\n\n";
+            cout << "Time taken: " << elapsed.count() << " ns\n\n";
 
         }
         else {
@@ -153,6 +153,7 @@ void runInterface() {
 
 int main () {
 
+    writeFibonacciCSV("Fibonacci_Time.csv");
     runInterface();
 
     return 0;
